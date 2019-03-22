@@ -6,14 +6,10 @@ A new Flutter application.
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
 - [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## 项目目录
 ```
 ├── android        // android 平台相关
 ├── ios            // ios 平台相关
@@ -29,8 +25,9 @@ samples, guidance on mobile development, and a full API reference.
     ├── ui         // 界面相关UI （dialog toast widgets）
     ├── utils      // 工具类
     └── main.dart  // app 入口文件
-├── assets         // 项目静态资源
+├── assets         // 项目静态资源.
     ├── images     // 公共图片
 ├── test           // 测试代码
 ├── pubspec.yaml   // 配置文件 依赖包，静态文件
 ```
+
