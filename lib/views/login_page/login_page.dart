@@ -68,33 +68,6 @@ class _LoginPageState extends State<LoginPage> {
                 ))));
   }
 
-  // 跳转注册模块
-  Align buildRegisterText(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Padding(
-        padding: EdgeInsets.only(top: 10.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('没有账号？'),
-            GestureDetector(
-              child: Text(
-                '点击注册',
-                style: TextStyle(color: Colors.green),
-              ),
-              onTap: () {
-                //TODO 跳转到注册页面
-                print('去注册');
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   // 第三方登录模块
   ButtonBar buildOtherMethod(BuildContext context) {
     return ButtonBar(
@@ -287,4 +260,39 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+}
+
+// 跳转注册模块
+Align buildRegisterText(BuildContext context) {
+  return Align(
+    alignment: Alignment.center,
+    child: Padding(
+      padding: EdgeInsets.only(top: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Checkbox(
+            value: true,// this.check,
+            activeColor: Colors.greenAccent, // #27948B
+            onChanged: (bool val) {
+              // val 是布尔值
+              print('复选框值:${val}');
+            },
+          ),
+          Text('我已经阅读并同意'),
+          GestureDetector(
+            child: Text(
+              'DEEP用户协议',
+              style: TextStyle(color: Colors.green), // 78CEFF
+            ),
+            onTap: () {
+              //TODO 跳转到注册页面
+              print('DEEP用户协议');
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    ),
+  );
 }

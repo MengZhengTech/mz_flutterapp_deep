@@ -36,6 +36,12 @@ dependencies:
   flutter_webview_plugin: ^0.3.1
   # 渐变 https://github.com/bluemix/gradient-widgets
   gradient_widgets: ^0.3.1
+  # 地图 https://github.com/johnpryan/flutter_map
+  # amap_base: 0.3.4
+  amap_base_map: 0.3.4 # 仅地图
+  # amap_base_navi: 0.3.4 # 仅导航(高德导航SDK已包含地图, 不要跟amap_base_map重复引用)
+  # amap_base_search: 0.3.4 # 仅搜索
+  # amap_base_location: 0.3.4 # 仅定位
 
 dev_dependencies:
   flutter_test:

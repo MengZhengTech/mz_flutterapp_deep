@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:mz_flutterapp_deep/views/login_page/login_page.dart';
+import 'package:mz_flutterapp_deep/views/mind_page/mindMap_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       ),
       home: new Scaffold(
         body: new Center(
-          child: new LoginPage(),
+          child: new MindMapPage(),//new LoginPage(),
         ),
       )
     );

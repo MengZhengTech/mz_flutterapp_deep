@@ -15,7 +15,7 @@ This project is a starting point for a Flutter application.
 ├── ios            // ios 平台相关
 ├── lib            // flutter 相关
     ├── common     // 常用类
-    ├── data       // 网路数据层
+    ├── api        // 网路数据层
     ├── db         // 数据库
     ├── demo       // 测试案例
     ├── event      // 事件类
@@ -27,7 +27,8 @@ This project is a starting point for a Flutter application.
     └── main.dart  // app 入口文件
 ├── assets         // 项目静态资源.
     ├── images     // 公共图片
+    └── fonts      // 系统字体包
 ├── test           // 测试代码
-├── pubspec.yaml   // 配置文件 依赖包，静态文件
+└── pubspec.yaml   // 配置文件 依赖包，静态文件
 ```
 
