@@ -22,6 +22,7 @@ class _HeaderBarState extends State<HeaderBar> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
+
     return new ConstrainedBox(
       constraints:
         new BoxConstraints(minWidth: double.infinity, maxHeight: ScreenUtil().setWidth(90)),
@@ -54,5 +55,6 @@ class _HeaderBarState extends State<HeaderBar> {
         ],
       ),
     );
+
   }
 }
