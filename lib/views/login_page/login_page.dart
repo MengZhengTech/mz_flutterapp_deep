@@ -2,10 +2,15 @@
  * created by Huai 2019/3/22 0022
  * 登录页
  */
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:mz_flutterapp_deep/data/net/dio_util.dart';
+
+import 'package:mz_flutterapp_deep/data/apis/apis.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,8 +18,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final formKey = GlobalKey<FormState>();
-  String email, password, phone;
+  final _formKey = GlobalKey<FormState>();
+  String _email, _password, _phone;
   bool _isObscure = true;
   Color _eyeColor;
   List _loginMethod = [
@@ -46,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Scaffold(
             backgroundColor: Colors.transparent,
             body: Form(
-                key: formKey,
+                key: _formKey,
                 child: ListView(
                   padding: EdgeInsets.symmetric(horizontal: 43.0),
                   children: <Widget>[
@@ -61,8 +66,9 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: ScreenUtil().setWidth(63)),
                     buildLoginButton(context),
                     SizedBox(height: ScreenUtil().setWidth(150)),
-                    buildOtherLoginText(),
-                    buildOtherMethod(context),
+                    //buildOtherLoginText(),
+                    SizedBox(height: 30.0),
+                    // buildOtherMethod(context),
                     buildRegisterText(context),
                   ],
                 ))));
@@ -123,7 +129,15 @@ class _LoginPageState extends State<LoginPage> {
         width: ScreenUtil().setWidth(580),
         child: GradientButton(
           child: Text('手机号登录'),
-          callback: () => print(''),
+          callback: (){
+            if (_formKey.currentState.validate()) {
+              ///只有输入的内容符合要求通过才会到达此处
+              _formKey.currentState.save();
+              //TODO 执行登录方法
+              print('phone:$_phone');
+              postLoginData({"params":{"phone":_phone}});
+            }
+          },
           increaseHeightBy: ScreenUtil().setWidth(110),
           increaseWidthBy: ScreenUtil().setWidth(580),
           shapeRadius: BorderRadius.circular(50.0),
@@ -171,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // 手机号
+  // 手机号文字
   TextFormField buildPhoneNumberField() {
     return TextFormField(
       decoration: InputDecoration(
@@ -198,7 +212,7 @@ class _LoginPageState extends State<LoginPage> {
           return '请输入正确的手机号码';
         }
       },
-      onSaved: (String value) => phone = value,
+      onSaved: (String value) => _phone = value,
       style: TextStyle(color: Colors.white),
     );
   }
@@ -206,7 +220,7 @@ class _LoginPageState extends State<LoginPage> {
   // 密码框
   TextFormField buildPasswordTextField(BuildContext context) {
     return TextFormField(
-      onSaved: (String value) => password = value,
+      onSaved: (String value) => _password = value,
       obscureText: _isObscure,
       validator: (String value) {
         if (value.isEmpty) {
@@ -244,7 +258,7 @@ class _LoginPageState extends State<LoginPage> {
           return '请输入正确的邮箱地址';
         }
       },
-      onSaved: (String value) => email = value,
+      onSaved: (String value) => _email = value,
     );
   }
 
@@ -260,39 +274,50 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
 
-// 跳转注册模块
-Align buildRegisterText(BuildContext context) {
-  return Align(
-    alignment: Alignment.center,
-    child: Padding(
-      padding: EdgeInsets.only(top: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Checkbox(
-            value: true,// this.check,
-            activeColor: Colors.greenAccent, // #27948B
-            onChanged: (bool val) {
-              // val 是布尔值
-              print('复选框值:${val}');
-            },
-          ),
-          Text('我已经阅读并同意'),
-          GestureDetector(
-            child: Text(
-              'DEEP用户协议',
-              style: TextStyle(color: Colors.green), // 78CEFF
+  // 跳转注册模块
+  Align buildRegisterText(BuildContext context) {
+    return Align(
+      alignment: Alignment.center,
+      child: Padding(
+        padding: EdgeInsets.only(top: 10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Checkbox(
+              value: true,// this.check,
+              activeColor: Colors.greenAccent, // #27948B
+              onChanged: (bool val) {
+                // val 是布尔值
+                print('复选框值:${val}');
+              },
             ),
-            onTap: () {
-              //TODO 跳转到注册页面
-              print('DEEP用户协议');
-              Navigator.pop(context);
-            },
-          ),
-        ],
+            Text('我已经阅读并同意'),
+            GestureDetector(
+              child: Text(
+                'DEEP用户协议',
+                style: TextStyle(color: Colors.green), // 78CEFF
+              ),
+              onTap: () {
+                //TODO 跳转到注册页面
+                print('DEEP用户协议');
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
+
+  // 执行登录操作
+  void postLoginData([Map<String, dynamic> params]) async{
+    var phone = print(params["params"]["phone"]);
+    try{
+      var response = await NetUtils.get("http://apis.juhe.cn/simpleWeather/query", params: {"city":"上海","key":"9026cd29870db15d3e9707981b609d82 "});
+      print(response);
+    }catch(e){
+      print(e);
+    }
+  }
 }
