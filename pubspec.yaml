@@ -42,6 +42,8 @@ dependencies:
   # amap_base_navi: 0.3.4 # 仅导航(高德导航SDK已包含地图, 不要跟amap_base_map重复引用)
   # amap_base_search: 0.3.4 # 仅搜索
   # amap_base_location: 0.3.4 # 仅定位
+  page_view_indicator: ^2.0.0
+
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +70,9 @@ flutter:
   - assets/images/
   - assets/images/login_ground_glass.jpg
   - assets/images/logo@2x.png
+  - assets/images/demo/demo1.jpg
+  - assets/images/demo/demo2.jpg
+  - assets/images/demo/demo3.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
