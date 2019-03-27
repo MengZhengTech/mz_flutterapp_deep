@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:mz_flutterapp_deep/views/login_page/login_page.dart';
+//import 'package:mz_flutterapp_deep/views/login_page/login_page.dart';
 import 'package:mz_flutterapp_deep/views/mind_page/mindMap_page.dart';
+//import 'package:mz_flutterapp_deep/views/mind_page/locationMap_page.dart';
 
 void main() => runApp(MyApp());
 
