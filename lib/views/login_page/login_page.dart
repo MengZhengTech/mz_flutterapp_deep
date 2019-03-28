@@ -74,33 +74,20 @@ class _LoginPageState extends State<LoginPage> {
                 ))));
   }
 
-  // 第三方登录模块
-  ButtonBar buildOtherMethod(BuildContext context) {
-    return ButtonBar(
-      alignment: MainAxisAlignment.center,
-      children: _loginMethod
-          .map((item) => Builder(
-                builder: (context) {
-                  return IconButton(
-                      icon: Icon(item['icon'],
-                          color: Theme.of(context).iconTheme.color),
-                      onPressed: () {
-                        //TODO : 第三方登录方法
-                        Scaffold.of(context).showSnackBar(new SnackBar(
-                          content: new Text("${item['title']}登录"),
-                          action: new SnackBarAction(
-                            label: "取消",
-                            onPressed: () {},
-                          ),
-                        ));
-                      });
-                },
-              ))
-          .toList(),
+  // logo
+  Padding buildLogo(BuildContext context) {
+    var paddingVal = ScreenUtil().setWidth(115);
+    print(paddingVal);
+    return Padding(
+      padding: EdgeInsets.fromLTRB(paddingVal, ScreenUtil().setWidth(140),
+          paddingVal, ScreenUtil().setWidth(150)), // left top right bottom
+      child: Image.asset(
+        'assets/images/logo@2x.png',
+      ),
     );
   }
 
-  // 手机号
+  // 手机号文本
   Padding buildPhoneText(BuildContext context) {
     return Padding(
         padding: EdgeInsets.only(left: ScreenUtil().setWidth(14)),
@@ -119,6 +106,38 @@ class _LoginPageState extends State<LoginPage> {
             )
           ],
         ));
+  }
+
+  // 手机号输入框
+  TextFormField buildPhoneNumberField() {
+    return TextFormField(
+      decoration: InputDecoration(
+        hintText: "请输入手机号",
+        hintStyle: TextStyle(color: Colors.white70),
+        prefixText: "+86  ",
+        prefixStyle: TextStyle(
+          color: Colors.white,
+        ),
+        labelStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 18,
+        ),
+        enabledBorder:
+        UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.cyan),
+        ),
+      ),
+      validator: (String value) {
+        var phoneReg = RegExp(
+            '^((13[0-9])|(15[^4])|(166)|(17[0-8])|(18[0-9])|(19[8-9])|(147,145))\\d{8}\$');
+        if (!phoneReg.hasMatch(value)) {
+          return '请输入正确的手机号码';
+        }
+      },
+      onSaved: (String value) => _phone = value,
+      style: TextStyle(color: Colors.white),
+    );
   }
 
   // 登录按钮
@@ -150,8 +169,37 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
           textStyle:
-              TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(34)),
+          TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(34)),
         ),
+      ),
+    );
+  }
+
+  // 验证码模块
+  Center IdCodeBuild(){
+    return new Center(
+      child: new Row(
+        children: <Widget>[
+          new Container(
+              child: new Row(
+                children: <Widget>[
+                  Icon(
+                    GroovinMaterialIcons.cellphone_android,
+                    color: Colors.white,
+                    size: ScreenUtil().setSp(36),
+                  ),
+                  Text(
+                    ' 手机号码',
+                    style: TextStyle(
+                        fontSize: ScreenUtil().setSp(34), color: Colors.white),
+                  ),
+                  Text(
+                    "密码登录"
+                  )
+                ],
+              ),
+          )
+        ],
       ),
     );
   }
@@ -164,6 +212,32 @@ class _LoginPageState extends State<LoginPage> {
           '快速登录',
           style: TextStyle(color: Colors.white, fontSize: 14.0),
         ));
+  }
+
+  // 第三方登录模块
+  ButtonBar buildOtherMethod(BuildContext context) {
+    return ButtonBar(
+      alignment: MainAxisAlignment.center,
+      children: _loginMethod
+          .map((item) => Builder(
+                builder: (context) {
+                  return IconButton(
+                      icon: Icon(item['icon'],
+                          color: Theme.of(context).iconTheme.color),
+                      onPressed: () {
+                        //TODO : 第三方登录方法
+                        Scaffold.of(context).showSnackBar(new SnackBar(
+                          content: new Text("${item['title']}登录"),
+                          action: new SnackBarAction(
+                            label: "取消",
+                            onPressed: () {},
+                          ),
+                        ));
+                      });
+                },
+              ))
+          .toList(),
+    );
   }
 
   // 忘记密码
@@ -182,38 +256,6 @@ class _LoginPageState extends State<LoginPage> {
           },
         ),
       ),
-    );
-  }
-
-  // 手机号文字
-  TextFormField buildPhoneNumberField() {
-    return TextFormField(
-      decoration: InputDecoration(
-        hintText: "请输入手机号",
-        hintStyle: TextStyle(color: Colors.white70),
-        prefixText: "+86  ",
-        prefixStyle: TextStyle(
-          color: Colors.white,
-        ),
-        labelStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-        ),
-        enabledBorder:
-            UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.cyan),
-        ),
-      ),
-      validator: (String value) {
-        var phoneReg = RegExp(
-            '^((13[0-9])|(15[^4])|(166)|(17[0-8])|(18[0-9])|(19[8-9])|(147,145))\\d{8}\$');
-        if (!phoneReg.hasMatch(value)) {
-          return '请输入正确的手机号码';
-        }
-      },
-      onSaved: (String value) => _phone = value,
-      style: TextStyle(color: Colors.white),
     );
   }
 
@@ -245,7 +287,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // 登录框
+  // 邮箱登录框
   TextFormField buildEmailTextField() {
     return TextFormField(
       decoration: InputDecoration(
@@ -259,19 +301,6 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       onSaved: (String value) => _email = value,
-    );
-  }
-
-  // logo
-  Padding buildLogo(BuildContext context) {
-    var paddingVal = ScreenUtil().setWidth(115);
-    print(paddingVal);
-    return Padding(
-      padding: EdgeInsets.fromLTRB(paddingVal, ScreenUtil().setWidth(140),
-          paddingVal, ScreenUtil().setWidth(150)), // left top right bottom
-      child: Image.asset(
-        'assets/images/logo@2x.png',
-      ),
     );
   }
 

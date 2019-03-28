@@ -22,6 +22,7 @@ This project is a starting point for a Flutter application.
     ├── models     // 实体类
     ├── views      // 项目页面
     ├── res        // 资源文件 （sreing colors dimens style...）
+    ├── routers    // 项目路由配置
     ├── ui         // 界面相关UI （dialog toast widgets）
     ├── utils      // 工具类
     └── main.dart  // app 入口文件
