@@ -9,6 +9,9 @@ class Routes{
   static String root = "/";  // 首页  不可换其他路径
 //  static String mindMap = "/mindMap";  // 心情
 
+  // 活动页面
+  static String activityList = '/activity/list';
+
 
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
@@ -18,5 +21,8 @@ class Routes{
     // 注册页面  参数传递请写在 router_handler.dart 文件中
     router.define(root, handler: homeIndexHandler);
 //    router.define(mindMap, handler: mindHandler);
+
+    // 活动页面
+    router.define(activityList, handler: activityListPageHandler);
   }
 }

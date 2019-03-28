@@ -5,9 +5,11 @@
 import "package:flutter/material.dart";
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:mz_flutterapp_deep/widgets/fab_bottom_app_bar.dart';
+// import 'package:mz_flutterapp_deep/routers/routers.dart';
 
 import 'package:mz_flutterapp_deep/views/mind_page/mindMap_page.dart';
-import 'package:mz_flutterapp_deep/views/activity_page/activityIndex_page.dart';
+// import 'package:mz_flutterapp_deep/views/activity_page/activityIndex_page.dart';
+import 'package:mz_flutterapp_deep/views/activity_page/activity_list_page.dart';
 import 'package:mz_flutterapp_deep/views/chat_page/chatIndex_page.dart';
 import 'package:mz_flutterapp_deep/views/personal_page/mineIndex_page.dart';
 
@@ -25,13 +27,14 @@ class _BottomNavigationState extends State<MyHomePage> with TickerProviderStateM
     setState(() {
       _currentIndex = index;
     });
+    // router.navigateTo(context, "/activity/list", transition: TransitionType.fadeIn);
   }
 
   @override
   void initState(){
     list
       ..add(MindMapPage())
-      ..add(ActivityIndexPage())
+      ..add(ActivityListPage())
       ..add(ChatIndexPage())
       ..add(MineIndexPage());
     super.initState();
