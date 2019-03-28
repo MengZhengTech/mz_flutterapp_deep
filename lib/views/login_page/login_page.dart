@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
           fontSize: 18,
         ),
         enabledBorder:
-        UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.cyan),
         ),
@@ -146,13 +146,15 @@ class _LoginPageState extends State<LoginPage> {
         width: ScreenUtil().setWidth(580),
         child: GradientButton(
           child: Text('手机号登录'),
-          callback: (){
+          callback: () {
             if (_formKey.currentState.validate()) {
               ///只有输入的内容符合要求通过才会到达此处
               _formKey.currentState.save();
               //TODO 执行登录方法
               print('phone:$_phone');
-              postLoginData({"params":{"phone":_phone}});
+              postLoginData({
+                "params": {"phone": _phone}
+              });
             }
           },
           increaseHeightBy: ScreenUtil().setWidth(110),
@@ -167,35 +169,33 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
           textStyle:
-          TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(34)),
+              TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(34)),
         ),
       ),
     );
   }
 
   // 验证码模块
-  Center IdCodeBuild(){
+  Center IdCodeBuild() {
     return new Center(
       child: new Row(
         children: <Widget>[
           new Container(
-              child: new Row(
-                children: <Widget>[
-                  Icon(
-                    GroovinMaterialIcons.cellphone_android,
-                    color: Colors.white,
-                    size: ScreenUtil().setSp(36),
-                  ),
-                  Text(
-                    ' 手机号码',
-                    style: TextStyle(
-                        fontSize: ScreenUtil().setSp(34), color: Colors.white),
-                  ),
-                  Text(
-                    "密码登录"
-                  )
-                ],
-              ),
+            child: new Row(
+              children: <Widget>[
+                Icon(
+                  GroovinMaterialIcons.cellphone_android,
+                  color: Colors.white,
+                  size: ScreenUtil().setSp(36),
+                ),
+                Text(
+                  ' 手机号码',
+                  style: TextStyle(
+                      fontSize: ScreenUtil().setSp(34), color: Colors.white),
+                ),
+                Text("密码登录")
+              ],
+            ),
           )
         ],
       ),
@@ -312,7 +312,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Checkbox(
-              value: true,// this.check,
+              value: true, // this.check,
               activeColor: Colors.greenAccent, // #27948B
               onChanged: (bool val) {
                 // val 是布尔值
@@ -338,12 +338,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   // 执行登录操作
-  void postLoginData([Map<String, dynamic> params]) async{
+  void postLoginData([Map<String, dynamic> params]) async {
     var phone = print(params["params"]["phone"]);
-    try{
-      var response = await NetUtils.get("http://apis.juhe.cn/simpleWeather/query", params: {"city":"上海","key":"9026cd29870db15d3e9707981b609d82 "});
+    try {
+      var response = await NetUtils.get(
+          "http://apis.juhe.cn/simpleWeather/query",
+          params: {"city": "上海", "key": "9026cd29870db15d3e9707981b609d82 "});
       print(response);
-    }catch(e){
+    } catch (e) {
       print(e);
     }
   }
