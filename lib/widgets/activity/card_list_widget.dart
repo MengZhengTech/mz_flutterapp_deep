@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 //  活动列表
-class CardList extends StatefulWidget {
-  CardList({Key key}) : super(key: key);
+class CardListWidget extends StatefulWidget {
+  CardListWidget({Key key}) : super(key: key);
 
   @override
-  _CardListState createState() => new _CardListState();
+  _CardListWidgetState createState() => new _CardListWidgetState();
 }
 
-class _CardListState extends State<CardList> {
+class _CardListWidgetState extends State<CardListWidget> {
 
   List<Map> data = [];
   int total = 40;  // 限制列表数量

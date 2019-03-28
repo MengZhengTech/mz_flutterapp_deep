@@ -3,15 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_view_indicator/page_view_indicator.dart';
 
 // 大图滚动
-class ImageScroll extends StatefulWidget {
-  ImageScroll({Key key}) : super(key: key);
+class ImageScrollWidget extends StatefulWidget {
+  ImageScrollWidget({Key key}) : super(key: key);
   // final List images;  // 图片地址和页面地址
 
   @override
-  _ImageScrollState createState() => new _ImageScrollState();
+  _ImageScrollWidgetState createState() => new _ImageScrollWidgetState();
 }
 
-class _ImageScrollState extends State<ImageScroll> {
+class _ImageScrollWidgetState extends State<ImageScrollWidget> {
   static const length = 3;
   final pageIndexNotifier = ValueNotifier<int>(0);
 

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // 地址、活动、搜索活动
-class HeaderBar extends StatefulWidget {
-  HeaderBar({Key key, this.title}) : super(key: key);
+class HeaderBarWidget extends StatefulWidget {
+  HeaderBarWidget({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _HeaderBarState createState() => new _HeaderBarState();
+  _HeaderBarWidgetState createState() => new _HeaderBarWidgetState();
 }
 
-class _HeaderBarState extends State<HeaderBar> {
+class _HeaderBarWidgetState extends State<HeaderBarWidget> {
   String _place = '厦门';
 
   void _setPlace(String name) {
