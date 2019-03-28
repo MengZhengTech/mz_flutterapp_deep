@@ -3,6 +3,7 @@
  * 首页
  */
 import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 import 'package:mz_flutterapp_deep/widgets/bottom_navigationBar.dart';
 
 class HomeIndexPage extends StatefulWidget{
@@ -13,6 +14,8 @@ class HomeIndexPage extends StatefulWidget{
 class _HomeIndexState extends State<HomeIndexPage>{
   @override
   Widget build(BuildContext context) {
+    // 全局设计稿尺寸初始化
+    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
     // TODO: implement build
     return new Scaffold(
       body: new MyHomePage()

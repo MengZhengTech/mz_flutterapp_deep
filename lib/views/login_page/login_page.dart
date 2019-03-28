@@ -39,8 +39,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
-
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
