@@ -70,6 +70,7 @@ flutter:
   - assets/images/
   - assets/images/login_ground_glass.jpg
   - assets/images/logo@2x.png
+
   - assets/images/demo/demo1.jpg
   - assets/images/demo/demo2.jpg
   - assets/images/demo/demo3.jpg

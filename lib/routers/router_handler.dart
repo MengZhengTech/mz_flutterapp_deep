@@ -13,7 +13,6 @@ import 'package:mz_flutterapp_deep/views/login_page/login_page.dart';
 import 'package:mz_flutterapp_deep/views/activity_page/activity_list_page.dart';
 
 var loginHandler = new Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params){
-
   return new LoginPage();
 });
 // 首页

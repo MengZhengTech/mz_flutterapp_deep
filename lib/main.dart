@@ -1,7 +1,13 @@
+
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:fluro/fluro.dart';
 import 'package:mz_flutterapp_deep/routers/routers.dart';
 import 'package:mz_flutterapp_deep/routers/application.dart';
+
+
 
 // import 'package:mz_flutterapp_deep/views/homeIndex_page.dart';
 
@@ -34,6 +40,10 @@ class MyApp extends StatelessWidget {
   }
 }
 
-void main() async {
+void main() { // async
   runApp(new MyApp());
+  if (Platform.isAndroid) { // 设置状态栏透明
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  }
 }
