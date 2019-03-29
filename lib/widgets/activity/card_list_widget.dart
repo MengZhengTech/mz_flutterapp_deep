@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mz_flutterapp_deep/routers/application.dart';
+import 'package:fluro/fluro.dart';
 
 //  活动列表
 class CardListWidget extends StatefulWidget {
@@ -53,150 +55,156 @@ class _CardListWidgetState extends State<CardListWidget> {
         }
         
         return 
+        GestureDetector(
+          onTap: () => Application.router.navigateTo(context, '/activity/detail', transition: TransitionType.inFromRight),
+          child: 
 
-        new Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: ScreenUtil().setWidth(37),
-            horizontal: ScreenUtil().setWidth(29),
-          ),
-          child: Row(
-            children: <Widget>[
+          new Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: ScreenUtil().setWidth(37),
+              horizontal: ScreenUtil().setWidth(29),
+            ),
+            child: Row(
+              children: <Widget>[
 
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(colors:[Colors.black54, Colors.black26]), //背景渐变
-                  borderRadius: BorderRadius.circular(6.0),
-                  image: DecorationImage(
-                    image: ExactAssetImage('assets/images/demo/user${index % 3 + 1}.png'),
-                    fit: BoxFit.cover,
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(colors:[Colors.black54, Colors.black26]), //背景渐变
+                    borderRadius: BorderRadius.circular(6.0),
+                    image: DecorationImage(
+                      image: ExactAssetImage('assets/images/demo/user${index % 3 + 1}.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: SizedBox(
+                    width: ScreenUtil().setWidth(210),
+                    height: ScreenUtil().setWidth(250),
                   ),
                 ),
-                child: SizedBox(
-                  width: ScreenUtil().setWidth(210),
+                
+                Container(
+                  width: ScreenUtil().setWidth(462),
                   height: ScreenUtil().setWidth(250),
-                ),
-              ),
-              
-              Container(
-                width: ScreenUtil().setWidth(462),
-                height: ScreenUtil().setWidth(250),
-                padding: EdgeInsets.only(left: ScreenUtil().setWidth(36)),
-                child:  ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: Stack(
-                    alignment:Alignment.topLeft, 
-                    children: <Widget>[
+                  padding: EdgeInsets.only(left: ScreenUtil().setWidth(36)),
+                  child:  ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: Stack(
+                      alignment:Alignment.topLeft, 
+                      children: <Widget>[
 
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
 
-                          Text(
-                            data[index]['title'],
+                            Text(
+                              data[index]['title'],
+                              style: TextStyle(
+                                color: Color(0xFF1B1B1B),
+                                fontSize: ScreenUtil().setSp(28),
+                                height: 30/28
+                              ),
+                              softWrap: true
+                            ),
+
+                            Row(
+                              children: <Widget>[
+                                Icon(Icons.room, color: Color(0xFF707070), size: ScreenUtil().setWidth(28)),
+                                Text(
+                                  data[index]['address'],
+                                  style: TextStyle(
+                                    color: Color(0xFF707070),
+                                    fontSize: ScreenUtil().setSp(24),
+                                    height: 30/24
+                                  ),
+                                  softWrap: true
+                                ),
+                              ],
+                            ),
+
+                          ],
+                        ),      
+
+                        Positioned(
+                          bottom: 1.0,
+                          left: 1.0,
+                          child: Text(
+                            data[index]['price'],
                             style: TextStyle(
-                              color: Color(0xFF1B1B1B),
+                              color: Color(0xFF313131),
                               fontSize: ScreenUtil().setSp(28),
                               height: 30/28
                             ),
                             softWrap: true
                           ),
+                        ),
 
-                          Row(
+                        Positioned(
+                          bottom: 1.0,
+                          right: 1.0,
+                          child: Text(
+                            data[index]['vote'],
+                            style: TextStyle(
+                              color: Color(0xFF959595),
+                              fontSize: ScreenUtil().setSp(24),
+                              height: 30/24
+                            ),
+                            softWrap: true
+                          ),
+                        ),
+
+                        Positioned(
+                          bottom: 26.0,
+                          left: 4.0,
+                          child: Row(
                             children: <Widget>[
-                              Icon(Icons.room, color: Color(0xFF707070), size: ScreenUtil().setWidth(28)),
-                              Text(
-                                data[index]['address'],
-                                style: TextStyle(
-                                  color: Color(0xFF707070),
-                                  fontSize: ScreenUtil().setSp(24),
-                                  height: 30/24
+
+                              Container(
+                                width: ScreenUtil().setWidth(getLen(data[index]['label'][0]) * 10 + 20),  // 根据文字数量设置长度，3*20+20
+                                height: ScreenUtil().setWidth(34),
+                                margin: EdgeInsets.only(right: ScreenUtil().setWidth(14)),
+                                child: OutlineButton(
+                                  child: Text(data[index]['label'][0], style:TextStyle(height: 1, fontSize: ScreenUtil().setSp(18))),
+                                  textColor: Color(0xFF57CEA8),
+                                  borderSide: BorderSide(color: Color(0xFF57CEA8), width: 1.0),
+                                  padding: EdgeInsets.symmetric(vertical: ScreenUtil().setWidth(1), horizontal: ScreenUtil().setWidth(1)),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                                  onPressed: () => {},
                                 ),
-                                softWrap: true
                               ),
+                              
+                              Container(
+                                width: ScreenUtil().setWidth(getLen(data[index]['label'][1]) * 10 + 20),
+                                height: ScreenUtil().setWidth(34),
+                                margin:EdgeInsets.only(right: ScreenUtil().setWidth(1)),
+                                child: OutlineButton(
+                                  child: Text(data[index]['label'][1], style:TextStyle(height: 1, fontSize: ScreenUtil().setSp(18))),
+                                  textColor: Color(0xFF57CEA8),
+                                  borderSide: BorderSide(color: Color(0xFF57CEA8), width: 1.0),
+                                  padding: EdgeInsets.symmetric(vertical: ScreenUtil().setWidth(1), horizontal: ScreenUtil().setWidth(1)),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                                  onPressed: () => {},
+                                ),
+                              ),
+                              
                             ],
                           ),
-
-                        ],
-                      ),      
-
-                      Positioned(
-                        bottom: 1.0,
-                        left: 1.0,
-                        child: Text(
-                          data[index]['price'],
-                          style: TextStyle(
-                            color: Color(0xFF313131),
-                            fontSize: ScreenUtil().setSp(28),
-                            height: 30/28
-                          ),
-                          softWrap: true
                         ),
-                      ),
 
-                      Positioned(
-                        bottom: 1.0,
-                        right: 1.0,
-                        child: Text(
-                          data[index]['vote'],
-                          style: TextStyle(
-                            color: Color(0xFF959595),
-                            fontSize: ScreenUtil().setSp(24),
-                            height: 30/24
-                          ),
-                          softWrap: true
-                        ),
-                      ),
-
-                      Positioned(
-                        bottom: 26.0,
-                        left: 4.0,
-                        child: Row(
-                          children: <Widget>[
-
-                            Container(
-                              width: ScreenUtil().setWidth(getLen(data[index]['label'][0]) * 10 + 20),  // 根据文字数量设置长度，3*20+20
-                              height: ScreenUtil().setWidth(34),
-                              margin: EdgeInsets.only(right: ScreenUtil().setWidth(14)),
-                              child: OutlineButton(
-                                child: Text(data[index]['label'][0], style:TextStyle(height: 1, fontSize: ScreenUtil().setSp(18))),
-                                textColor: Color(0xFF57CEA8),
-                                borderSide: BorderSide(color: Color(0xFF57CEA8), width: 1.0),
-                                padding: EdgeInsets.symmetric(vertical: ScreenUtil().setWidth(1), horizontal: ScreenUtil().setWidth(1)),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-                                onPressed: () => {},
-                              ),
-                            ),
-                            
-                            Container(
-                              width: ScreenUtil().setWidth(getLen(data[index]['label'][1]) * 10 + 20),
-                              height: ScreenUtil().setWidth(34),
-                              margin:EdgeInsets.only(right: ScreenUtil().setWidth(1)),
-                              child: OutlineButton(
-                                child: Text(data[index]['label'][1], style:TextStyle(height: 1, fontSize: ScreenUtil().setSp(18))),
-                                textColor: Color(0xFF57CEA8),
-                                borderSide: BorderSide(color: Color(0xFF57CEA8), width: 1.0),
-                                padding: EdgeInsets.symmetric(vertical: ScreenUtil().setWidth(1), horizontal: ScreenUtil().setWidth(1)),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-                                onPressed: () => {},
-                              ),
-                            ),
-                            
-                          ],
-                        ),
-                      ),
-
-                    ],
+                      ],
+                    ),
                   ),
-                ),
 
-              )
+                )
 
-            ]
+              ]
+            ),
           ),
+
         );
 
+        
       },
       separatorBuilder: (context, index) => Divider(height: 1.0),
     );
