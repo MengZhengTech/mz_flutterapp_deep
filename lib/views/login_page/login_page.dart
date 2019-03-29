@@ -339,12 +339,15 @@ class _LoginPageState extends State<LoginPage> {
 
   // 执行登录操作
   void postLoginData([Map<String, dynamic> params]) async {
-    var phone = print(params["params"]["phone"]);
     try {
-      var response = await NetUtils.get(
-          "http://apis.juhe.cn/simpleWeather/query",
-          params: {"city": "上海", "key": "9026cd29870db15d3e9707981b609d82 "});
-      print(response);
+      print("${NetUtils.host}${DeepApi.USER_PHONE}");
+        var response = await NetUtils.post (
+            "${NetUtils.host}${DeepApi.USER_PHONE}",
+            params: {"loginName": params["params"]["phone"], "type": 1}
+        );
+        if(response["message"]){
+
+        }
     } catch (e) {
       print(e);
     }
