@@ -14,9 +14,9 @@ var dio = new Dio();
 
 class NetUtils {
 
-  static final host = 'http://59.61.72.38:8000/'; // 服务器路径
+  static final host = 'http://192.168.1.101:8001/'; // 服务器路径
 
-  static Future post(String url,Map<String,dynamic> params) async{
+  static Future post(String url, {Map<String,dynamic> params}) async{
     var response = await dio.post(url, data: params);
     return response.data;
   }
