@@ -12,6 +12,7 @@ import 'package:mz_flutterapp_deep/views/login_page/login_page.dart';
 // 活动页面
 import 'package:mz_flutterapp_deep/views/activity_page/activity_list_page.dart';
 import 'package:mz_flutterapp_deep/views/activity_page/activity_detail_page.dart';
+import 'package:mz_flutterapp_deep/views/activity_page/activity_member_page.dart';
 
 var loginHandler = new Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params){
   return new LoginPage();
@@ -31,4 +32,7 @@ var activityListPageHandler = new Handler(handlerFunc: (BuildContext context, Ma
 });
 var activityDetailPageHandler = new Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params){
   return new ActivityDetailPage();
+});
+var activityMemberPageHandler = new Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params){
+  return new ActivityMemberPage();
 });

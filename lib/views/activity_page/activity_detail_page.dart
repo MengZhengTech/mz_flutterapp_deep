@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mz_flutterapp_deep/routers/application.dart';
+import 'package:fluro/fluro.dart';
 
 class ActivityDetailPage extends StatefulWidget{
   @override
@@ -201,112 +203,120 @@ class _ActivityDetailPageState extends State<ActivityDetailPage>{
                           ),
                         ),
                       
-                        Container(
-                          width:ScreenUtil().setWidth(750),
-                          height:ScreenUtil().setWidth(50),
-                          alignment: Alignment.center,
-                          child: Stack(
-                            children: <Widget>[
+                        GestureDetector(
+                          onTap: () => Application.router.navigateTo(context, '/activity/member', transition: TransitionType.inFromRight),
+                          child: 
+                          
+                          Container(
+                            width:ScreenUtil().setWidth(750),
+                            height:ScreenUtil().setWidth(50),
+                            alignment: Alignment.center,
+                            child: Stack(
+                              children: <Widget>[
 
-                              Positioned(
-                                left: ScreenUtil().setWidth(28),
-                                top: .0,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: EdgeInsets.only(right: ScreenUtil().setWidth(12), left: 0, top: 0, bottom: 0),
-                                      child: Icon(Icons.supervisor_account, color: Color(0xFF626262), size: ScreenUtil().setWidth(28)),
-                                    ),
-                                    Text(
-                                      '300人参与',
-                                      style: TextStyle(
-                                        color: Color(0xFF626262),
-                                        fontSize: ScreenUtil().setSp(26),
-                                        height: 30/26
+                                Positioned(
+                                  left: ScreenUtil().setWidth(28),
+                                  top: .0,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(right: ScreenUtil().setWidth(12), left: 0, top: 0, bottom: 0),
+                                        child: Icon(Icons.supervisor_account, color: Color(0xFF626262), size: ScreenUtil().setWidth(28)),
                                       ),
-                                      softWrap: true
-                                    ),
-                                  ],
+                                      Text(
+                                        '300人参与',
+                                        style: TextStyle(
+                                          color: Color(0xFF626262),
+                                          fontSize: ScreenUtil().setSp(26),
+                                          height: 30/26
+                                        ),
+                                        softWrap: true
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
 
-                              Positioned(
-                                right: ScreenUtil().setWidth(28),
-                                top: .0,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
+                                
+                                Positioned(
+                                  right: ScreenUtil().setWidth(28),
+                                  top: .0,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: <Widget>[
 
-                                    Padding(
-                                      padding: EdgeInsets.only(right: ScreenUtil().setWidth(12), left: 0, top: 0, bottom: 0),
-                                      child: DecoratedBox(
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(colors:[Colors.black54, Colors.black26]), //背景渐变
-                                          borderRadius: BorderRadius.circular(16.0),
-                                          image: DecorationImage(
-                                            image: ExactAssetImage('assets/images/demo/user3.png'),
-                                            fit: BoxFit.cover,
+                                      Padding(
+                                        padding: EdgeInsets.only(right: ScreenUtil().setWidth(12), left: 0, top: 0, bottom: 0),
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(colors:[Colors.black54, Colors.black26]), //背景渐变
+                                            borderRadius: BorderRadius.circular(16.0),
+                                            image: DecorationImage(
+                                              image: ExactAssetImage('assets/images/demo/user3.png'),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          child: SizedBox(
+                                            width: ScreenUtil().setWidth(32),
+                                            height: ScreenUtil().setWidth(32),
                                           ),
                                         ),
-                                        child: SizedBox(
-                                          width: ScreenUtil().setWidth(32),
-                                          height: ScreenUtil().setWidth(32),
-                                        ),
                                       ),
-                                    ),
 
-                                    Padding(
-                                      padding: EdgeInsets.only(right: ScreenUtil().setWidth(12), left: 0, top: 0, bottom: 0),
-                                      child: DecoratedBox(
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(colors:[Colors.black54, Colors.black26]), //背景渐变
-                                          borderRadius: BorderRadius.circular(16.0),
-                                          image: DecorationImage(
-                                            image: ExactAssetImage('assets/images/demo/user1.png'),
-                                            fit: BoxFit.cover,
+                                      Padding(
+                                        padding: EdgeInsets.only(right: ScreenUtil().setWidth(12), left: 0, top: 0, bottom: 0),
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(colors:[Colors.black54, Colors.black26]), //背景渐变
+                                            borderRadius: BorderRadius.circular(16.0),
+                                            image: DecorationImage(
+                                              image: ExactAssetImage('assets/images/demo/user1.png'),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          child: SizedBox(
+                                            width: ScreenUtil().setWidth(32),
+                                            height: ScreenUtil().setWidth(32),
                                           ),
                                         ),
-                                        child: SizedBox(
-                                          width: ScreenUtil().setWidth(32),
-                                          height: ScreenUtil().setWidth(32),
-                                        ),
                                       ),
-                                    ),
 
-                                    Padding(
-                                      padding: EdgeInsets.only(right: ScreenUtil().setWidth(12), left: 0, top: 0, bottom: 0),
-                                      child: DecoratedBox(
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(colors:[Colors.black54, Colors.black26]), //背景渐变
-                                          borderRadius: BorderRadius.circular(16.0),
-                                          image: DecorationImage(
-                                            image: ExactAssetImage('assets/images/demo/user2.png'),
-                                            fit: BoxFit.cover,
+                                      Padding(
+                                        padding: EdgeInsets.only(right: ScreenUtil().setWidth(12), left: 0, top: 0, bottom: 0),
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(colors:[Colors.black54, Colors.black26]), //背景渐变
+                                            borderRadius: BorderRadius.circular(16.0),
+                                            image: DecorationImage(
+                                              image: ExactAssetImage('assets/images/demo/user2.png'),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          child: SizedBox(
+                                            width: ScreenUtil().setWidth(32),
+                                            height: ScreenUtil().setWidth(32),
                                           ),
                                         ),
-                                        child: SizedBox(
-                                          width: ScreenUtil().setWidth(32),
-                                          height: ScreenUtil().setWidth(32),
-                                        ),
                                       ),
-                                    ),
 
-                                    Padding(
-                                      padding: EdgeInsets.only(right: ScreenUtil().setWidth(12), left: 0, top: ScreenUtil().setWidth(8), bottom: 0),
-                                      child: Icon(Icons.chevron_right, color: Color(0xFF959595), size: ScreenUtil().setWidth(20)),
-                                    ),
+                                      Padding(
+                                        padding: EdgeInsets.only(right: ScreenUtil().setWidth(12), left: 0, top: ScreenUtil().setWidth(8), bottom: 0),
+                                        child: Icon(Icons.chevron_right, color: Color(0xFF959595), size: ScreenUtil().setWidth(20)),
+                                      ),
 
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
 
-                            ],
+                              ],
+                            ),
                           ),
+
                         ),
 
+                        
                       ],
                     ),
                   ),

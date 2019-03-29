@@ -12,6 +12,7 @@ class Routes{
   // 活动页面
   static String activityList = '/activity/list';
   static String activityDetail = '/activity/detail';
+  static String activityMember = '/activity/member';
 
 
   static void configureRoutes(Router router){
@@ -26,5 +27,6 @@ class Routes{
     // 活动页面
     router.define(activityList, handler: activityListPageHandler);
     router.define(activityDetail, handler: activityDetailPageHandler);
+    router.define(activityMember, handler: activityMemberPageHandler);
   }
 }
