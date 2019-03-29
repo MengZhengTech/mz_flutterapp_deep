@@ -37,6 +37,11 @@ class _ActivityListPageState extends State<ActivityListPage>{
             HeaderBarWidget(title: '活动'),
             ImageScrollWidget(),
             // CardListWidget(),
+            Container(
+              width: double.infinity,
+              height: getHeight(),
+              child: CardListWidget(),
+            ),
           ]
         )
 
@@ -45,4 +50,9 @@ class _ActivityListPageState extends State<ActivityListPage>{
     );
 
   }
+
+  double getHeight() {
+    return ScreenUtil.screenHeight - ScreenUtil().setWidth(149) - ScreenUtil().setWidth(300) - ScreenUtil.bottomBarHeight - 652;
+  }
+
 }
