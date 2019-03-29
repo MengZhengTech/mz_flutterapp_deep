@@ -1,5 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mz_flutterapp_deep/routers/application.dart';
+import 'package:fluro/fluro.dart';
+import 'package:mz_flutterapp_deep/widgets/activity/member_list_widget.dart';
 
 class ActivityMemberPage extends StatefulWidget{
   @override
@@ -25,12 +28,69 @@ class _ActivityMemberPageState extends State<ActivityMemberPage>{
             alignment:Alignment.topCenter, 
             children: <Widget>[
 
-              Text('memberpage')
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      color:Color(0xffffffff),
+                      boxShadow: [BoxShadow(
+                        color:Color(0xffaaaaaa), 
+                        offset: Offset(2.0,2.0),
+                        blurRadius: 4.0
+                      )],
+                    ),
+                    child: Container(
+                      width: ScreenUtil().setWidth(750),
+                      height: ScreenUtil().setHeight(138),
+                      padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(19), top: 0, left: 0, right: 0),
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        '参与人员',
+                        style:TextStyle(
+                          color: Color(0xFF313131),
+                          fontSize: ScreenUtil().setSp(32),
+                          fontWeight: FontWeight.bold
+                        )
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    width: ScreenUtil().setWidth(750),
+                    height: getHeight(),
+                    child: MemberListWidget(),
+                  ),
+                  
+                ],
+              ),      
+              
+              Positioned(
+                top: ScreenUtil().setWidth(60),
+                left: ScreenUtil().setWidth(27),
+                child: Icon(Icons.arrow_back, color: Color(0xFF57CEA8), size: ScreenUtil().setWidth(43)),
+              ),
+
+              Positioned(
+                top: ScreenUtil().setWidth(60),
+                right: ScreenUtil().setWidth(27),
+                child: Text(
+                  '邀请',
+                  style: TextStyle(
+                    color: Color(0xFF57CEA8),
+                    fontSize: ScreenUtil().setSp(28),
+                    height: 30/28
+                  ),
+                  softWrap: true
+                ),
+              ),
               
             ],
           ),
         ),
-
 
       ),
     
@@ -38,6 +98,9 @@ class _ActivityMemberPageState extends State<ActivityMemberPage>{
 
   }
 
+  double getHeight() {
+    return ScreenUtil.screenHeight - ScreenUtil().setWidth(138) - 440;
+  }
   
 
 }
