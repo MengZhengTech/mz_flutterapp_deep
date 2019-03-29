@@ -21,39 +21,60 @@ class _HeaderBarWidgetState extends State<HeaderBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
 
-    return new ConstrainedBox(
-      constraints:
-        new BoxConstraints(minWidth: double.infinity, maxHeight: ScreenUtil().setWidth(90)),
-      child: Stack(
-        alignment: Alignment.center, //指定未定位或部分定位widget的对齐方式
-        children: <Widget>[
-          Container(
-            child: Text(widget.title,
-              style: TextStyle(
-                color: Colors.black54,
-                fontWeight: FontWeight.bold,
-                fontSize: ScreenUtil().setWidth(32)
-              )
-            ),
-          ),
-          Positioned(
-            left: ScreenUtil().setWidth(32),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Text(_place),
-                new Icon(Icons.keyboard_arrow_down),
-              ],
-            ),
-          ),
-          Positioned(
-            right: ScreenUtil().setWidth(32),
-            child: new Icon(Icons.search),
-          )
-        ],
+    return new Container(
+      height: ScreenUtil().setWidth(149), 
+      padding: EdgeInsets.only(
+        left: ScreenUtil().setWidth(32), 
+        top: ScreenUtil().setWidth(71), 
+        right: ScreenUtil().setWidth(32), 
+        bottom: ScreenUtil().setWidth(32)
       ),
+    
+      child: 
+      ConstrainedBox(
+        constraints: BoxConstraints.expand(),
+        child: 
+
+        Stack(
+          alignment: Alignment.center, //指定未定位或部分定位widget的对齐方式
+          children: <Widget>[
+
+            Container(
+              child: Text(
+                widget.title,
+                style: TextStyle(
+                  color: Color(0xFF313131),
+                  fontWeight: FontWeight.bold,
+                  fontSize: ScreenUtil().setSp(32)
+                )
+              ),
+            ),
+
+            Positioned(
+              left: ScreenUtil().setWidth(32),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Text(_place, style:TextStyle(
+                    color: Color(0xFF313131),
+                    fontSize: ScreenUtil().setSp(28)
+                  )),
+                  new Icon(Icons.keyboard_arrow_down),
+                ],
+              ),
+            ),
+
+            Positioned(
+              right: ScreenUtil().setWidth(32),
+              child: new Icon(Icons.search),
+            )
+
+          ],
+        ),
+      
+      ),
+      
     );
 
   }
