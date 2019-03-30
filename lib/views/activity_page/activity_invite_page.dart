@@ -2,14 +2,14 @@ import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mz_flutterapp_deep/routers/application.dart';
 import 'package:fluro/fluro.dart';
-import 'package:mz_flutterapp_deep/widgets/activity/member_list_widget.dart';
+import 'package:mz_flutterapp_deep/widgets/activity/invite_list_widget.dart';
 
-class ActivityMemberPage extends StatefulWidget{
+class ActivityInvitePage extends StatefulWidget{
   @override
-  _ActivityMemberPageState createState() => _ActivityMemberPageState();
+  _ActivityInvitePageState createState() => _ActivityInvitePageState();
 }
 
-class _ActivityMemberPageState extends State<ActivityMemberPage>{
+class _ActivityInvitePageState extends State<ActivityInvitePage>{
   
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class _ActivityMemberPageState extends State<ActivityMemberPage>{
                   Container(
                     width: ScreenUtil().setWidth(750),
                     height: getHeight(),
-                    child: MemberListWidget(),
+                    child: InviteListWidget(),
                   ),
                   
                 ],
