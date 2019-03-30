@@ -16,12 +16,12 @@ class NetUtils {
 
   static final host = 'http://192.168.1.101:8001/'; // 服务器路径
 
-  static Future post(String url, {Map<String,dynamic> params}) async{
+  static Future post(String url, Map<String,dynamic> params) async{
     var response = await dio.post(url, data: params);
     return response.data;
   }
 
-  static Future get(String path, {Map<String, dynamic> params}) async {
+  static Future get(String path, Map<String, dynamic> params) async {
     var response = await dio.get(path, queryParameters: params);
     return response.data;
   }
