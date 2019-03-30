@@ -14,6 +14,7 @@ class Routes{
   static String activityList = '/activity/list';
   static String activityDetail = '/activity/detail';
   static String activityMember = '/activity/member';
+  static String activityInvite = '/activity/invite';
 
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
@@ -30,5 +31,6 @@ class Routes{
     router.define(activityList, handler: activityListPageHandler);
     router.define(activityDetail, handler: activityDetailPageHandler);
     router.define(activityMember, handler: activityMemberPageHandler);
+    router.define(activityInvite, handler: activityInvitePageHandler);
   }
 }
