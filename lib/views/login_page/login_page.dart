@@ -13,6 +13,9 @@ import 'package:mz_flutterapp_deep/data/apis/apis.dart';
 
 import 'package:mz_flutterapp_deep/widgets/login/verification_code.dart';
 
+import 'package:mz_flutterapp_deep/routers/routers.dart';
+import 'package:mz_flutterapp_deep/routers/application.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -23,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   String _password, _phone, _verCode, _verifyStr = "获取验证码";
 
   // 不同步骤表示不同的状态 1： 输入手机号  2： 输入验证码  3： 输入密码
-  int _loginStep = 2;
+  int _loginStep = 1;
   bool _isObscure = true;
   Color _eyeColor;
 
@@ -432,7 +435,9 @@ class _LoginPageState extends State<LoginPage> {
                   width: ScreenUtil().setWidth(580),
                   child: GradientButton(
                     child: Text('登录'),
-                    callback: () {},
+                    callback: () {
+
+                    },
                     increaseHeightBy: ScreenUtil().setWidth(77),
                     increaseWidthBy: ScreenUtil().setWidth(250),
                     shapeRadius: BorderRadius.circular(50.0),
@@ -550,11 +555,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   // 获取验证码
-  void getVerCode([Map<String, dynamic> params]) async {}
+  void getVerCode([Map<String, dynamic> params]) async {
+
+  }
 
   // 验证码 倒计时
   void _startTimer() {
     print("开始计时");
+    getVerCode();
     _timer = Timer.periodic(Duration(seconds: 2), (timer) {
       if(!_isSend){
         _isSend = !_isSend;
