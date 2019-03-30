@@ -99,7 +99,7 @@ class _ActivityMemberPageState extends State<ActivityMemberPage>{
   }
 
   double getHeight() {
-    return ScreenUtil.screenHeight - ScreenUtil().setWidth(138) - 440;
+    return ScreenUtil.screenHeight - ScreenUtil().setWidth(138) - 588;
   }
   
 

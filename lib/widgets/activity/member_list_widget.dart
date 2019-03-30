@@ -99,72 +99,96 @@ class _MemberListWidgetState extends State<MemberListWidget> {
                           children: <Widget>[
 
                             Text(
-                              data[index]['title'],
+                              data[index]['name'],
                               style: TextStyle(
                                 color: Color(0xFF1B1B1B),
-                                fontSize: ScreenUtil().setSp(30),
-                                height: 40/30
+                                fontSize: ScreenUtil().setSp(26),
+                                height: 1
                               ),
                               softWrap: true
                             ),
 
-                            DecoratedBox(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(colors:[Color(0xFF57CEA8), Color(0xFF68B7D9)]), //背景渐变
-                                borderRadius: BorderRadius.circular(3.0),
-                              ),
-                              child: 
-                              
-                              Row(
-                                children: <Widget>[  // Icons.mood
-                                  Icon(Icons.face, color: Color(0xFFffffff), size: ScreenUtil().setWidth(28)),
-                                  Text(
-                                    data[index]['address'],
-                                    style: TextStyle(
-                                      color: Color(0xFF707070),
-                                      fontSize: ScreenUtil().setSp(24),
-                                      height: 30/24
+                            Container(
+                              width:ScreenUtil().setWidth(125),
+                              height: ScreenUtil().setWidth(28),
+                              margin: EdgeInsets.only(left: 0, right: 0, top: ScreenUtil().setWidth(4), bottom: ScreenUtil().setWidth(4)),
+                              child:
+
+                              DecoratedBox(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(colors:[Color(0xFF57CEA8), Color(0xFF68B7D9)]), //背景渐变
+                                  borderRadius: BorderRadius.circular(3.0),
+                                ),
+                                child: 
+                                
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[  
+                                    Padding(
+                                      padding: EdgeInsets.only(left: ScreenUtil().setWidth(5)),
+                                      child: Icon((data[index]['sex'] == 'female' ? Icons.face : Icons.mood), color: Color(0xFFffffff), size: ScreenUtil().setWidth(28)),
                                     ),
-                                    softWrap: true
-                                  ),
-                                ],
+                                    Padding(
+                                      padding: EdgeInsets.only(left: ScreenUtil().setWidth(4)),
+                                      child: 
+                                      Text(
+                                        data[index]['age'],
+                                        style: TextStyle(
+                                          color: Color(0xFFffffff),
+                                          fontSize: ScreenUtil().setSp(24),
+                                          height: 26/24
+                                        ),
+                                        softWrap: true
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: ScreenUtil().setWidth(4)),
+                                      child: 
+                                      Text(
+                                        data[index]['constellation'],
+                                        style: TextStyle(
+                                          color: Color(0xFFffffff),
+                                          fontSize: ScreenUtil().setSp(24),
+                                          height: 22/24
+                                        ),
+                                        softWrap: true
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
                               ),
 
                             ),
 
-                            Text(
-                              data[index]['title'],
-                              style: TextStyle(
-                                color: Color(0xFF707070),
-                                fontSize: ScreenUtil().setSp(24),
-                                height: 30/24
+                            Container(
+                              width:ScreenUtil().setWidth(320),
+                              height: ScreenUtil().setWidth(30),
+                              child: Text(
+                                data[index]['message'],
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Color(0xFF707070),
+                                  fontSize: ScreenUtil().setSp(22),
+                                  height: 1
+                                ),
+                                softWrap: true
                               ),
-                              softWrap: true
                             ),
+                            
 
                           ],
                         ),      
 
                         Positioned(
-                          bottom: 1.0,
-                          left: 1.0,
-                          child: Text(
-                            data[index]['price'],
-                            style: TextStyle(
-                              color: Color(0xFF313131),
-                              fontSize: ScreenUtil().setSp(28),
-                              height: 30/28
-                            ),
-                            softWrap: true
-                          ),
-                        ),
-
-                        Positioned(
-                          bottom: 71.0,
-                          right: 1.0,
+                          bottom: ScreenUtil().setWidth(35),
+                          right: ScreenUtil().setWidth(6),
                           child: Icon(Icons.control_point, color: Color(0xFFB5B5B5), size: ScreenUtil().setWidth(38)),
                         ),
-                        
+
                       ],
                     ),
                   ),
@@ -197,18 +221,14 @@ class _MemberListWidgetState extends State<MemberListWidget> {
 
       setState(() {
         List<Map> dataRetrieve = [
-          {'title': '【演唱会】张国荣全息投影演唱会，跨年演唱会第一场', 'address': '福建省厦门市同安区', 
-          'price': '￥280', 'vote': '95.5% 满意', 'label': ['随时退', '能量抵10元']},
-          {'title': '【亲子游】厦门乡村一日游，赠《芙蓉国粹》大型变脸秀', 'address': '福建省厦门市海沧区', 
-          'price': '￥160 - ￥180', 'vote': '95.5% 满意', 'label': ['随时退', '能量抵6元']},
-          {'title': '【演唱会】张国荣全息投影演唱会，跨年演唱会第一场', 'address': '福建省厦门市同安区', 
-          'price': '￥280', 'vote': '95.5% 满意', 'label': ['随时退', '能量抵10元']},
-          {'title': '【亲子游】厦门乡村一日游，赠《芙蓉国粹》大型变脸秀', 'address': '福建省厦门市海沧区', 
-          'price': '￥160 - ￥180', 'vote': '95.5% 满意', 'label': ['随时退', '能量抵6元']},
-          {'title': '【演唱会】张国荣全息投影演唱会，跨年演唱会第一场', 'address': '福建省厦门市同安区', 
-          'price': '￥280', 'vote': '95.5% 满意', 'label': ['随时退', '能量抵100元']},
-          {'title': '【亲子游】厦门乡村一日游，赠《芙蓉国粹》大型变脸秀', 'address': '福建省厦门市海沧区', 
-          'price': '￥160 - ￥180', 'vote': '95.5% 满意', 'label': ['随时退', '能量抵666元']},
+          {'name': '路人甲', 'sex': 'male', 'age': '23', 'constellation': '白羊', 
+          'message': '人生若只如初见，当时却知道是宣传'},
+          {'name': '嘻嘻的温暖', 'sex': 'female', 'age': '23', 'constellation': '白羊', 
+          'message': '万事接续，万物捷运'},
+          {'name': '孤独的设计是', 'sex': 'male', 'age': '23', 'constellation': '白羊', 
+          'message': '海上月是天使月，延期人是新鲜事'},
+          {'name': '任性是吗', 'sex': 'male', 'age': '23', 'constellation': '白羊', 
+          'message': '商河公司，魏军一下'},
         ];
         data.addAll(dataRetrieve); 
       });
