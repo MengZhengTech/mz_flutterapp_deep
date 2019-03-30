@@ -4,14 +4,14 @@ import 'package:mz_flutterapp_deep/routers/application.dart';
 import 'package:fluro/fluro.dart';
 
 //  活动列表
-class MemberListWidget extends StatefulWidget {
-  MemberListWidget({Key key}) : super(key: key);
+class InviteListWidget extends StatefulWidget {
+  InviteListWidget({Key key}) : super(key: key);
 
   @override
-  _MemberListWidgetState createState() => new _MemberListWidgetState();
+  _InviteListWidgetState createState() => new _InviteListWidgetState();
 }
 
-class _MemberListWidgetState extends State<MemberListWidget> {
+class _InviteListWidgetState extends State<InviteListWidget> {
 
   List<Map> data = [];
   int total = 40;  // 限制列表数量

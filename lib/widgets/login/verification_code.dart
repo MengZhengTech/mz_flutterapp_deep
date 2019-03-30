@@ -2,6 +2,7 @@
  * created by Huai 2019/3/29 0029
  * 验证码组件
  */
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class VerificationCodeInput extends StatefulWidget {
@@ -155,5 +156,67 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: _buildListWidget(),
         ));
+  }
+}
+abstract class CustomerInputBorder extends UnderlineInputBorder {
+  double textSize;
+  double letterSpace;
+  int textLength;
+
+  double textTrueWidth;
+  final double startOffset;
+
+  void calcTrueTextSize() {
+    // 测量单个数字实际长度
+    var paragraph = ui.ParagraphBuilder(ui.ParagraphStyle(fontSize: textSize))
+      ..addText("0");
+    var p = paragraph.build()
+      ..layout(ui.ParagraphConstraints(width: double.infinity));
+    textTrueWidth = p.minIntrinsicWidth;
+  }
+
+  CustomerInputBorder({
+    this.textSize = 0.0,
+    this.letterSpace = 0.0,
+    this.textLength,
+    BorderSide borderSide = const BorderSide(),
+  })  : startOffset = letterSpace * 0.5,
+        super(borderSide: borderSide) {
+    calcTrueTextSize();
+  }
+}
+
+class CustomRectInputBorder extends CustomerInputBorder {
+  CustomRectInputBorder({
+    double textSize = 0.0,
+    double letterSpace,
+    int textLength,
+    BorderSide borderSide = const BorderSide(),
+  }) : super(
+      textSize: textSize,
+      letterSpace: letterSpace,
+      textLength: textLength,
+      borderSide: borderSide);
+
+  double get offsetX => textTrueWidth * 0.3;
+
+  double get offsetY => textTrueWidth * 0.3;
+
+  @override
+  void paint(
+      Canvas canvas,
+      Rect rect, {
+        double gapStart,
+        double gapExtent = 0.0,
+        double gapPercentage = 0.0,
+        TextDirection textDirection,
+      }) {
+    double curStartX = rect.left + startOffset - offsetX;
+    for (int i = 0; i < textLength; i++) {
+      Rect r = Rect.fromLTWH(curStartX, rect.top + offsetY,
+          textTrueWidth + offsetX * 2, rect.height - offsetY * 2);
+      canvas.drawRect(r, borderSide.toPaint());
+      curStartX += (textTrueWidth + letterSpace);
+    }
   }
 }
