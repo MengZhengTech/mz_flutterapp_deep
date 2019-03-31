@@ -8,6 +8,8 @@ import 'package:mz_flutterapp_deep/widgets/bottom_navigationBar.dart';
 
 import 'package:mz_flutterapp_deep/routers/routers.dart';
 import 'package:mz_flutterapp_deep/routers/application.dart';
+import 'package:mz_flutterapp_deep/views/login_page/login_page.dart';
+import 'package:mz_flutterapp_deep/data/config.dart';
 
 
 class HomeIndexPage extends StatefulWidget{
@@ -21,10 +23,13 @@ class _HomeIndexState extends State<HomeIndexPage>{
     // 全局设计稿尺寸初始化
     ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
     // TODO: implement build
-
+    //print(isLogin.toString()+"123");
+    print(Config.isLogin.toString()+"123");
     return new Scaffold(
-      body: new MyHomePage()
+      body:!Config.isLogin? new LoginPage():new MyHomePage()
     );
   }
+
+
 
 }

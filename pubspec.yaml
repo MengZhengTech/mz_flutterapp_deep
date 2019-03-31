@@ -43,10 +43,15 @@ dependencies:
   # amap_base_search: 0.3.4 # 仅搜索
   amap_base_location: 0.3.4 # 仅定位
   page_view_indicator: ^2.0.0
-#  # 数据存储
-#  sqflite: ^1.1.3
-#  # 本地存储、收藏功能
-#  shared_preferences: ^0.5.1+2
+  path_provider: ^0.5.0
+  sqflite: ^1.1.3
+  transparent_image: ^1.0.0
+  cached_network_image: ^0.7.0
+  #相机图片获取
+  image_picker: ^0.5.0+9
+  #消息广播插件
+  fluttertoast: ^3.0.3
+
 
 
 dev_dependencies:
