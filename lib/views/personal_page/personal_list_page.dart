@@ -105,7 +105,7 @@ class _PersonalListPageState extends State<PersonalListPage>{
   }
 
   double getHeight() {
-    return ScreenUtil.screenHeight - ScreenUtil().setHeight(178) - 592;
+    return ScreenUtil.screenHeight - ScreenUtil().setHeight(178) - 592 - 200;
   }
   
   // 用户搜索好友
