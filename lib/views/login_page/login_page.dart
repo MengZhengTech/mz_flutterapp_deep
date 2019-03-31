@@ -16,6 +16,10 @@ import 'package:mz_flutterapp_deep/widgets/login/verification_code.dart';
 import 'package:mz_flutterapp_deep/routers/routers.dart';
 import 'package:mz_flutterapp_deep/routers/application.dart';
 
+import 'package:mz_flutterapp_deep/data/net/sqflite.dart';
+import 'dart:convert';
+import 'package:mz_flutterapp_deep/data/config.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -35,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
 
   /// 当前倒计时的秒数。
   int _seconds;
+
   /// 是否已经发送 默认为 false
   bool _isSend = false;
 
@@ -248,24 +253,24 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 2.0),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: FlatButton(
-                    child: Text(
-                      '密码输入',
-                      style: TextStyle(
-                          fontSize: ScreenUtil().setSp(28),
-                          color: Color(0xff50C2C9)),
-                    ),
-                    onPressed: () {
-                      _loginStep = 3;
-                      setState(() {});
-                    },
-                  ),
-                ),
-              )
+//              Padding(
+//                padding: const EdgeInsets.only(right: 2.0),
+//                child: Align(
+//                  alignment: Alignment.centerRight,
+//                  child: FlatButton(
+//                    child: Text(
+//                      '密码输入',
+//                      style: TextStyle(
+//                          fontSize: ScreenUtil().setSp(28),
+//                          color: Color(0xff50C2C9)),
+//                    ),
+//                    onPressed: () {
+//                      _loginStep = 3;
+//                      setState(() {});
+//                    },
+//                  ),
+//                ),
+//              )
             ],
           ),
           Row(
@@ -277,6 +282,8 @@ class _LoginPageState extends State<LoginPage> {
                 length: 4,
                 onCompleted: (String value) {
                   _verCode = value;
+                  print(value);
+                  postLogin(value);
                 },
               )
             ],
@@ -290,17 +297,19 @@ class _LoginPageState extends State<LoginPage> {
                   height: ScreenUtil().setWidth(110),
                   width: ScreenUtil().setWidth(580),
                   child: GradientButton(
-                    child: _isSend?InkWell(
-                      child: Text(_verifyStr),
-                    ):InkWell(
-                      child: Text("获取验证码"),
-                    ),
+                    child: _isSend
+                        ? InkWell(
+                            child: Text(_verifyStr),
+                          )
+                        : InkWell(
+                            child: Text("获取验证码"),
+                          ),
                     callback: () {
-                      if(_timer.toString() != "null"){
+                      if (_timer.toString() != "null") {
                         return false;
                       }
                       _startTimer();
-                      _verifyStr = '已发送$_seconds'+'s';
+                      _verifyStr = '已发送$_seconds' + 's';
                       setState(() {});
                     },
                     increaseHeightBy: ScreenUtil().setWidth(77),
@@ -436,7 +445,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: GradientButton(
                     child: Text('登录'),
                     callback: () {
-
+                      postLogin(_password);
                     },
                     increaseHeightBy: ScreenUtil().setWidth(77),
                     increaseWidthBy: ScreenUtil().setWidth(250),
@@ -541,12 +550,18 @@ class _LoginPageState extends State<LoginPage> {
     try {
       var response = await NetUtils.post(
           "${NetUtils.host}${DeepApi.USER_PHONE}",
-          params: {"loginName": params["params"]["phone"], "type": 1});
+          {"loginName": params["params"]["phone"], "type": 1});
       var status = response["status"];
+      print(response.toString());
       if (status == 1) {
         _loginStep = 2;
       } else {
-        _loginStep = 3;
+        if(response["data"].toString().indexOf("loginPwd")!=-1 && response["data"]["loginPwd"].toString() !="" ){
+          //var loginPwd = response["data"]["loginPwd"].toString();
+          _loginStep = 3;
+        }else{
+          _loginStep = 2;
+        }
       }
       setState(() {});
     } catch (e) {
@@ -556,15 +571,76 @@ class _LoginPageState extends State<LoginPage> {
 
   // 获取验证码
   void getVerCode([Map<String, dynamic> params]) async {
+    try {
+      print(params["params"]["phone"].toString());
+      var response = await NetUtils.post("${NetUtils.host}${DeepApi.GET_SMS}",
+          {"loginName": params["params"]["phone"], "type": 1});
+      var status = response["status"];
 
+      print(response.toString());
+    } catch (e) {
+      print(e);
+    }
   }
+  //登录
+ void postLogin(String postdata) async{
+   try {
+     DateTime now = DateTime.now();
+     Map<String, dynamic> datas ;
+     if(_loginStep == 2 )
+     {
+         datas = {"loginName": _phone, "type": 1,"verificationCode":postdata};
+     }else{
+         datas = {"loginName": _phone, "type": 1,"loginPwd":postdata};
+     }
+     print(datas.toString());
+     var response = await NetUtils.post("${NetUtils.host}${DeepApi.CHECK_PHONE}", datas);
+     print(response.toString());
+     var status = response["status"];
+     if(status == 0)
+       {
+           var dataStr  = response["data"];
+           var data = json.decode(dataStr);
+           print(dataStr);
+           DateTime time = now.add(new Duration(days: 7));
+           String year = time.year.toString();
+           String month = time.month>9?time.month.toString():"0" + time.month.toString();
+           String day = time.day>9?time.day.toString():"0"+time.day.toString();
+           String dateTime = year + "-" + month + "-" + day;
+           String loginPwd = dataStr.indexOf("loginPwd")!=-1?data["loginPwd"]:"";
+           String name = dataStr.indexOf("name")!=-1?data["name"]:"";
+           String signature = dataStr.indexOf("signature")!=-1?data["signature"]:"";
+           String chatSign = dataStr.indexOf("chatSign")!=-1?data["chatSign"]:"";
+           print(data["guid"].toString());
+           User userData = new User(0, data["guid"].toString(), data["loginName"].toString(), loginPwd, data["type"].toString(), chatSign , name, signature, dateTime);
+           UserSqlite userSqlite = new UserSqlite();
+           await userSqlite.openSqlite();
+           print(userData.guid);
+           User user = await userSqlite.getUser(userData.guid);
+           if(user == null)
+           {
+              await userSqlite.insert(userData);
+           }else{
+              await userSqlite.update(userData);
+           }
+           Config.isLogin = true;
+           await userSqlite.close();
+           await Application.router.navigateTo(context, "${Routes.root}");
+       }else{
 
+     }
+   } catch (e) {
+     print(e);
+   }
+ }
   // 验证码 倒计时
   void _startTimer() {
     print("开始计时");
-    getVerCode();
+    getVerCode({
+      "params": {"phone": _phone}
+    });
     _timer = Timer.periodic(Duration(seconds: 2), (timer) {
-      if(!_isSend){
+      if (!_isSend) {
         _isSend = !_isSend;
       }
       if (_seconds == 0) {
