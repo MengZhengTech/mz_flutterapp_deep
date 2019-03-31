@@ -16,6 +16,9 @@ class Routes{
   static String activityMember = '/activity/member';
   static String activityInvite = '/activity/invite';
 
+  // 个人中心页面
+  static String personalList = '/personal/list';
+
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
         handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -32,5 +35,8 @@ class Routes{
     router.define(activityDetail, handler: activityDetailPageHandler);
     router.define(activityMember, handler: activityMemberPageHandler);
     router.define(activityInvite, handler: activityInvitePageHandler);
+
+    // 个人中心页面
+    router.define(personalList, handler: personalListPageHandler);
   }
 }

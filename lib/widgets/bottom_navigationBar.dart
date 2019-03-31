@@ -12,7 +12,7 @@ import 'package:mz_flutterapp_deep/views/mind_page/mindMap_page.dart';
 // import 'package:mz_flutterapp_deep/views/activity_page/activityIndex_page.dart';
 import 'package:mz_flutterapp_deep/views/activity_page/activity_list_page.dart';
 import 'package:mz_flutterapp_deep/views/chat_page/chatIndex_page.dart';
-import 'package:mz_flutterapp_deep/views/personal_page/mineIndex_page.dart';
+import 'package:mz_flutterapp_deep/views/personal_page/personal_list_page.dart';
 
 
 import "package:mz_flutterapp_deep/views/login_page/login_page.dart";
@@ -40,7 +40,7 @@ class _BottomNavigationState extends State<MyHomePage> with TickerProviderStateM
       ..add(MindMapPage())
       ..add(ActivityListPage())
       ..add(ChatIndexPage())
-      ..add(MineIndexPage());
+      ..add(PersonalListPage());
     super.initState();
   }
 
