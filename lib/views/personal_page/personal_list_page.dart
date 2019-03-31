@@ -39,14 +39,15 @@ class _PersonalListPageState extends State<PersonalListPage>{
 
                     DecoratedBox(
                       decoration: BoxDecoration(
-                        color:Color(0xffffffff),
-                        border: Border(
-                          bottom: BorderSide(width: ScreenUtil().setWidth(2), color: Color(0xFFDCDCDC)),
+                        gradient: LinearGradient(colors:[Colors.black54, Colors.black26]), //背景渐变
+                        image: DecorationImage(
+                          image: ExactAssetImage('assets/images/demo/background1.jpg'),
+                          fit: BoxFit.cover,
                         ),
                       ),
                       child: Container(
                         width: ScreenUtil().setWidth(750),
-                        height: ScreenUtil().setHeight(178),
+                        height: ScreenUtil().setHeight(400),
                         padding: EdgeInsets.only(bottom: ScreenUtil().setWidth(24), top: ScreenUtil().setWidth(60), left: ScreenUtil().setHeight(24), right: ScreenUtil().setHeight(110)),
                         alignment: Alignment.bottomCenter,
                         child: 
@@ -105,7 +106,7 @@ class _PersonalListPageState extends State<PersonalListPage>{
   }
 
   double getHeight() {
-    return ScreenUtil.screenHeight - ScreenUtil().setHeight(178) - 592 - 200;
+    return ScreenUtil.screenHeight - ScreenUtil().setHeight(178) - 592 - 300;
   }
   
   // 用户搜索好友
